@@ -11,10 +11,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "ap
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-class ToDo(db.Model):
+class Todo(db.Model):
     __tablename__ = "todos"
     id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(100) nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     done = db.Column(db.Boolean)
 
     def __init__(self, title, done):
@@ -30,8 +30,18 @@ todos_schema = TodoSchema(many=True)
 
 @app.route("/", methods=["GET"])
 def home():
-    return "<h1> Half dark, half light... just like me</h1>"
+    return "<h1> Half dark, half light... just like me </h1>"
 
+#GET
+@app.route("/todos", methods=["GET"])
+def get_todos():
+    all_todos = Todo.query.all()
+    result = todo_schema.dump(all_todos)
+    return jsonify(result)
+
+#POST
+#PUT / PATCH
+#DELETE
 
 if __name__ == "__main__":
     app.debug = True
