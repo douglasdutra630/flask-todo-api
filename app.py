@@ -45,7 +45,7 @@ def get_todos():
     return jsonify(result)
 
 @app.route('/todo/<id>', methods=['GET'])
-def get_todo:
+def get_todo():
     todo = Todo.query.get(id)
 
     result = todo_schema.dump(todo)
