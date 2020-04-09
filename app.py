@@ -40,7 +40,7 @@ todos_schema = TodoSchema(many=True)
 
 @app.route("/", methods=["GET"])
 def home():
-    return "<h1> Half dark, half light... just like me </h1>"
+    return "<h1> Flask ToDo App </h1>"
 
 #GET
 @app.route("/todos", methods=["GET"])
